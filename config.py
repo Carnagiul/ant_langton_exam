@@ -16,6 +16,8 @@ height_grid = 0
 max_height_grid = 150
 min_height_grid = 50
 
+gameRunning = False
+
 ants = [
 	{
 		"label" : "Ant 1",
@@ -24,6 +26,7 @@ ants = [
 		"positions": {
 			"x": -1,
 			"y": -1,
+			"yaw": -1,
 		}
 	},
 	{
@@ -33,6 +36,7 @@ ants = [
 		"positions": {
 			"x": -1,
 			"y": -1,
+			"yaw": -1,
 		}
 	},
 	{
@@ -42,6 +46,7 @@ ants = [
 		"positions": {
 			"x": -1,
 			"y": -1,
+			"yaw": -1,
 		}
 	},
 	{
@@ -51,6 +56,7 @@ ants = [
 		"positions": {
 			"x": -1,
 			"y": -1,
+			"yaw": -1,
 		}
 	},
 ]
