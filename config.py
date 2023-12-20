@@ -16,7 +16,7 @@ height_grid = 0
 max_height_grid = 150
 min_height_grid = 50
 
-gameRunning = False
+game_running = False
 
 ants = [
 	{
@@ -152,10 +152,30 @@ def create_new_ant(id):
 		"positions": {
 			"x": -1,
 			"y": -1,
+			"yaw": -1,
 		}
 	},
 
 def update_count_ants(new_count):
 	global ants
 	ants.pop(len(ants) - new_count)
-	print(len(ants))
+
+def start_game():
+	global game_running
+	game_running = True
+
+def stop_game():
+	global game_running
+	game_running = False
+
+def reset_counter():
+	global iteration
+	iteration = 0
+
+def reset_matrice():
+	define_new_matrix()
+
+def reset_game():
+	stop_game()
+	reset_counter()
+	reset_matrice()
