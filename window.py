@@ -29,14 +29,15 @@ def update_window():
 					x = ant['positions']['x']
 					y = ant['positions']['y']
 					color = '#FFFFFF'
-					if set_matrice(x, y):
+					updated_cell = set_matrice(x, y)
+					if updated_cell:
 						color = ant['color']
 						if canvas.find_withtag('c_'+str(x)+'_'+str(y)) == ():
 							canvas.create_rectangle(x * get_size_cell(), y * get_size_cell(), (x + 1) * get_size_cell(), (y + 1) * get_size_cell(), fill=color, tags=('c_'+str(x)+'_'+str(y)))
 					else:
 						# Remove the existing canvas item with the specified tag
 						canvas.delete('c_'+str(x)+'_'+str(y))
-					moveAnt(i)
+					moveAnt(i, updated_cell)
 			increase_iteration()
 			window.after(100, update)  # Schedule the next update after 100 milliseconds
 	update()
@@ -268,7 +269,7 @@ def initWindow():
 
 	frame_preview = tk.Frame(window_preview,bg='red')
 	frame_preview.grid(row=0, column=1, sticky='nsew')
-
+	update_count_ants(1)
 	renderMenu()
 	window.mainloop()
 	window_preview.mainloop()

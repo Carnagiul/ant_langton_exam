@@ -16,48 +16,7 @@ min_height_grid = 50
 
 game_running = False
 
-ants = [
-	{
-		"label" : "Ant 1",
-		"color" : "red",
-		"enabled": True,
-		"positions": {
-			"x": -1,
-			"y": -1,
-			"yaw": -1,
-		}
-	},
-	{
-		"label" : "Ant 2",
-		"color" : "green",
-		"enabled": False,
-		"positions": {
-			"x": -1,
-			"y": -1,
-			"yaw": -1,
-		}
-	},
-	{
-		"label" : "Ant 3",
-		"color" : "blue",
-		"enabled": False,
-		"positions": {
-			"x": -1,
-			"y": -1,
-			"yaw": -1,
-		}
-	},
-	{
-		"label" : "Ant 4",
-		"color" : "yellow",
-		"enabled": False,
-		"positions": {
-			"x": -1,
-			"y": -1,
-			"yaw": -1,
-		}
-	},
-]
+ants = []
 
 
 def set_width_grid(new_width):
@@ -145,12 +104,12 @@ def create_new_ant(id):
 		"color" : "red",
 		"enabled": True,
 		"positions": {
-			"x": random.randint(0, max_width_grid),
-			"y": random.randint(0, max_height_grid),
+			"x": random.randint(0, width_grid),
+			"y": random.randint(0, height_grid),
 			"yaw": 0,
 		}
 	}
-	ants[len(ants)] = ant
+	ants.append(ant)
 	return ant
 
 def check_ant(id):
@@ -170,21 +129,27 @@ def check_ant(id):
 	
 
 
-def moveAnt(id):
+def moveAnt(id, updated_cell):
 	global ants
+
 	old_x = ants[id]['positions']['x']
 	old_y = ants[id]['positions']['y']
 	old_yaw = ants[id]['positions']['yaw']
-
+	
+	if updated_cell:
+		ants[id]['positions']['yaw'] = ants[id]['positions']['yaw'] + 1
+	else:
+		ants[id]['positions']['yaw'] = ants[id]['positions']['yaw'] - 1
+	
 	if ants[id]['positions']['yaw'] == 0:
 		ants[id]['positions']['x'] = ants[id]['positions']['x'] + 1
 	elif ants[id]['positions']['yaw'] == 1:
-		ants[id]['positions']['y'] = ants[id]['positions']['y'] - 1
+		ants[id]['positions']['y'] = ants[id]['positions']['y'] + 1
 	elif ants[id]['positions']['yaw'] == 2:
 		ants[id]['positions']['x'] = ants[id]['positions']['x'] - 1
 	elif ants[id]['positions']['yaw'] == 3:
-		ants[id]['positions']['y'] = ants[id]['positions']['y'] + 1
-	ants[id]['positions']['yaw'] = ants[id]['positions']['yaw'] + 1
+		ants[id]['positions']['y'] = ants[id]['positions']['y'] - 1
+
 	check_ant(id)
 
 	next_x = ants[id]['positions']['x']
