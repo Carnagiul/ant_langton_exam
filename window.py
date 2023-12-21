@@ -61,8 +61,6 @@ def renderMenu():
 			ant_entries[i].delete(0, tk.END)
 			ant_entries[i].insert(0, color[1])
 			update_ant_color(i, color[1])
-		print(color)
-		debugAnts()
 				
 	def options(event=None):
 		info = Tk()
@@ -152,6 +150,34 @@ def renderMenu():
 			window_preview.destroy()
 			window.destroy()
 
+	def start():
+		if not get_game_running():
+			for i in range(ant_count_scale.get()):
+				color = ant_entries[i].get()
+				if color:
+					update_ant_color(i, color)
+				else:
+					messagebox.showerror("Erreur", "Veuillez choisir une couleur pour la fourmi " + str(i + 1))
+					return
+				
+			if messagebox.askokcancel("Start", "Voulez-vous vraiment lancer le jeu?"):
+				start_game()
+				start.config(text="Stop", command=stop)
+		else:
+			if messagebox.askokcancel("Stop", "Voulez-vous vraiment stopper le jeu?"):
+				stop_game()
+				start.config(text="Start", command=start)
+	
+	def stop():
+		if messagebox.askokcancel("Stop", "Voulez-vous vraiment stopper le jeu?"):
+			stop_game()
+			start.config(text="Start", command=start)
+	
+	def reset():
+		if messagebox.askokcancel("Reset", "Voulez-vous vraiment réinitialiser le jeu?"):
+			reset_game()
+			start.config(text="Start", command=start)
+	
 	menubar = Menu(window_preview)
 	menubar.add_command(label = "Jeu", command=jeu)
 	menubar.add_command(label="Options", command=options)
@@ -168,6 +194,12 @@ def renderMenu():
 	row.grid(row=1, column=0)
 	ant_count_scale = Scale(window_preview, from_=1, to=4, orient="horizontal", resolution=1, command=ant_count_changed)
 	ant_count_scale.grid(row=2, column=0)
+
+	start = tk.Button(window_preview, text="Start", command=start)
+	start.grid(row=0, column=0, padx=5, pady=5)
+
+	reset = tk.Button(window_preview, text="Reset", command=reset)
+	reset.grid(row=0, column=1, padx=5, pady=5)
 
 	# Store the dynamically created entry widgets and labels
 	ant_entries = []

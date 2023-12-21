@@ -167,6 +167,10 @@ def update_count_ants(new_count):
 	while new_count > len(ants):
 		create_new_ant(len(ants))
 
+def get_game_running():
+	global game_running
+	return game_running
+
 def start_game():
 	global game_running
 	game_running = True
