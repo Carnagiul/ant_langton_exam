@@ -19,6 +19,31 @@ ant_entries = None
 ant_labels = None
 ant_buttons = None
 
+colored_cells = None
+
+def update_window():
+	global window, frame, canvas, colored_cells, ant_count_scale
+	def update():
+		if get_game_running():
+			for i in range(ant_count_scale.get()):
+				ant = get_ant(i)
+				if ant['enabled']:
+					x = ant['positions']['x']
+					y = ant['positions']['y']
+					color = '#FFFFFF'
+					if set_matrice(x, y):
+						color = ant['color']
+						if canvas.find_withtag('c_'+str(x)+'_'+str(y)) == ():
+							canvas.create_rectangle(x * get_size_cell(), y * get_size_cell(), (x + 1) * get_size_cell(), (y + 1) * get_size_cell(), fill=color, tags=('c_'+str(x)+'_'+str(y)))
+					else:
+						# Remove the existing canvas item with the specified tag
+						canvas.delete('c_'+str(x)+'_'+str(y))
+					moveAnt(i)
+			increase_iteration()
+			window.after(100, update)  # Schedule the next update after 100 milliseconds
+	update()
+
+
 def renderMenu():
 	global window, frame, canvas, window_preview, frame_preview, ant_count_scale
 	
@@ -163,6 +188,7 @@ def renderMenu():
 			if messagebox.askokcancel("Start", "Voulez-vous vraiment lancer le jeu?"):
 				start_game()
 				start.config(text="Stop", command=stop)
+				update_window()
 		else:
 			if messagebox.askokcancel("Stop", "Voulez-vous vraiment stopper le jeu?"):
 				stop_game()
@@ -217,6 +243,8 @@ def initWindow():
 	window.title('Langton')
 	window_preview = Tk()
 	window_preview.title('Commands')
+
+	colored_cells = []
 
 	grid = create_random_grid_lc(get_width_grid(), get_height_grid(), [0,1])
 	canvas = custom_grid_canvas(window, grid, get_size_cell(), margin=10, gutter=2, show_vals=False, outline=False)

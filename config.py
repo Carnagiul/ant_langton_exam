@@ -151,6 +151,38 @@ def create_new_ant(id):
 		}
 	},
 
+def check_ant(id):
+	global ants
+	if ants[id]['positions']['x'] < 0:
+		ants[id]['positions']['x'] = get_width_grid() - 1
+	elif ants[id]['positions']['x'] >= get_width_grid():
+		ants[id]['positions']['x'] = 0
+	if ants[id]['positions']['y'] < 0:
+		ants[id]['positions']['y'] = get_height_grid() - 1
+	elif ants[id]['positions']['y'] >= get_height_grid():
+		ants[id]['positions']['y'] = 0
+
+
+def moveAnt(id):
+	global ants
+	if ants[id]['positions']['yaw'] == 0:
+		ants[id]['positions']['yaw'] = 1
+		ants[id]['positions']['x'] = ants[id]['positions']['x'] + 1
+	elif ants[id]['positions']['yaw'] == 1:
+		ants[id]['positions']['yaw'] = 2
+		ants[id]['positions']['y'] = ants[id]['positions']['y'] - 1
+	elif ants[id]['positions']['yaw'] == 2:
+		ants[id]['positions']['yaw'] = 3
+		ants[id]['positions']['x'] = ants[id]['positions']['x'] - 1
+	elif ants[id]['positions']['yaw'] == 3:
+		ants[id]['positions']['yaw'] = 0
+		ants[id]['positions']['y'] = ants[id]['positions']['y'] + 1
+	check_ant(id)
+
+def get_ant(i):
+	global ants
+	return ants[i]
+
 def debugAnts():
 	global ants
 	print(ants)
