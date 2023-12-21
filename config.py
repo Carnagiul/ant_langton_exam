@@ -1,6 +1,4 @@
-avaible_colors = [
-	"red", "green", "blue", "yellow"
-];
+import random
 
 iteration = 0
 ant_count = 1
@@ -140,25 +138,34 @@ def set_size_cell(new_size):
 	global size_cell
 	size_cell = new_size
 
-def get_avaible_color():
-	global avaible_colors
-	return avaible_colors
-
 def create_new_ant(id):
+	global max_width_grid, max_height_grid
 	return {
 		"label" : "Ant " + str(id),
 		"color" : "red",
 		"enabled": True,
 		"positions": {
-			"x": -1,
-			"y": -1,
-			"yaw": -1,
+			"x": random.randint(0, max_width_grid),
+			"y": random.randint(0, max_height_grid),
+			"yaw": 0,
 		}
 	},
 
+def debugAnts():
+	global ants
+	print(ants)
+
+def update_ant_color(id, color):
+	global ants
+	ants[id]['color'] = color
+	print(ants[id], color, ants[id]['color'])
+
 def update_count_ants(new_count):
 	global ants
-	ants.pop(len(ants) - new_count)
+	while len(ants) > new_count:
+		ants.pop()
+	while new_count > len(ants):
+		create_new_ant(len(ants))
 
 def start_game():
 	global game_running

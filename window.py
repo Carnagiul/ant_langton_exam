@@ -24,7 +24,6 @@ def renderMenu():
 	
 	def ant_count_changed(*args):
 		ant_count = ant_count_scale.get()
-		print(ant_count, len(ant_entries))
 
 		if len(ant_entries) > 0:
 			while ant_count < len(ant_entries):
@@ -32,13 +31,16 @@ def renderMenu():
 				ant_labels.pop().grid_remove()
 				ant_buttons.pop().grid_remove()
 		
+		update_count_ants(ant_count)
+		debugAnts()
+		
 		while ant_count > len(ant_buttons):
 			i = len(ant_buttons)
 			label = tk.Label(window_preview, text=f"Ant {i + 1}")
 			label.grid(row=3 + i, column=0, padx=5, pady=5)
 			ant_labels.append(label)
 
-			color_entry = tk.Entry(window_preview, width=10, state='disabled')
+			color_entry = tk.Entry(window_preview, width=10)
 			color_entry.grid(row=3 + i, column=1, padx=5, pady=5)
 			ant_entries.append(color_entry)
 
@@ -58,7 +60,9 @@ def renderMenu():
 		if color[1] is not None:
 			ant_entries[i].delete(0, tk.END)
 			ant_entries[i].insert(0, color[1])
-
+			update_ant_color(i, color[1])
+		print(color)
+		debugAnts()
 				
 	def options(event=None):
 		info = Tk()
@@ -183,7 +187,7 @@ def initWindow():
 	window_preview.title('Commands')
 
 	grid = create_random_grid_lc(get_width_grid(), get_height_grid(), [0,1])
-	canvas = grid_canvas(window, grid, get_size_cell(), margin=10, gutter=2, show_vals=False, outline=False)
+	canvas = custom_grid_canvas(window, grid, get_size_cell(), margin=10, gutter=2, show_vals=False, outline=False)
 
 	width = int(canvas['width'])
 	height = int(canvas['height'])
