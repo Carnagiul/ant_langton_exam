@@ -217,7 +217,7 @@ def renderMenu():
 
 	row = tk.LabelFrame(window_preview, width=300, height=100, text='Ant Count')
 	row.grid(row=1, column=0)
-	ant_count_scale = Scale(window_preview, from_=1, to=4, orient="horizontal", resolution=1, command=ant_count_changed)
+	ant_count_scale = Scale(window_preview, from_=1, to=10, orient="horizontal", resolution=1, command=ant_count_changed)
 	ant_count_scale.grid(row=2, column=0)
 
 	start = tk.Button(window_preview, text="Start", command=start)
@@ -247,8 +247,8 @@ def initWindow():
 	grid = create_random_grid_lc(get_width_grid(), get_height_grid(), [0,1])
 	canvas = custom_grid_canvas(window, grid, get_size_cell(), margin=10, gutter=2, show_vals=False, outline=False)
 
-	width = int(canvas['width'])
-	height = int(canvas['height'])
+	width = get_width_grid() * get_size_cell()
+	height = get_height_grid() * get_size_cell()
 
 	ws = window.winfo_screenwidth()
 	hs = window.winfo_screenheight()

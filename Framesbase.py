@@ -12,23 +12,33 @@ def create_header_text(window):
 def create_row_width(window):
     row = Label(window, text='Longueur de la grille : ')
     row.grid(row=1, column=0)
-    width_scale = Scale(window, from_=50, to=150, orient="horizontal", variable=IntVar(), resolution=5)
+    width_scale = Scale(window, from_=50, to=1000, orient="horizontal", variable=IntVar(), resolution=5)
     width_scale.grid(row=1, column=1)
     return width_scale
 
 def create_row_height(window):
     row = Label(window, text='Hauteur de la grille : ')
     row.grid(row=2, column=0, pady=2)
-    height_scale = Scale(window, from_=50, to=150, orient="horizontal", variable=IntVar(), resolution=5)
+    height_scale = Scale(window, from_=50, to=1000, orient="horizontal", variable=IntVar(), resolution=5)
     height_scale.grid(row=2, column=1, pady=2)
     return height_scale
 
-def create_button_validate(window, width_scale, height_scale):
+
+def create_cell_height(window):
+    row = Label(window, text='Taille d\'une cellule : ')
+    row.grid(row=3, column=0, pady=2)
+    cell_scale = Scale(window, from_=1, to=10, orient="horizontal", variable=IntVar(), resolution=1)
+    cell_scale.grid(row=3, column=1, pady=2)
+    return cell_scale
+
+def create_button_validate(window, width_scale, height_scale, cell_scale):
     def validate_user_input():
         set_width_grid(width_scale.get())
         set_height_grid(height_scale.get())
+        set_size_cell(cell_scale.get())
         width_scale.config(state='disabled')
         height_scale.config(state='disabled')
+        cell_scale.config(state='disabled')
         window.destroy()
 
     button = Button(window, text='Valider', command=validate_user_input)
@@ -55,5 +65,6 @@ def show_start_frame():
     create_header_text(window)
     width_scale = create_row_width(window)
     height_scale = create_row_height(window)
-    create_button_validate(window, width_scale, height_scale)
+    cell_scale = create_cell_height(window) 
+    create_button_validate(window, width_scale, height_scale, cell_scale)
     window.mainloop()
