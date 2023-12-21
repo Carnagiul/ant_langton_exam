@@ -135,20 +135,19 @@ def moveAnt(id, updated_cell):
 	old_x = ants[id]['positions']['x']
 	old_y = ants[id]['positions']['y']
 	old_yaw = ants[id]['positions']['yaw']
-	
 	if updated_cell:
 		ants[id]['positions']['yaw'] = ants[id]['positions']['yaw'] + 1
 	else:
 		ants[id]['positions']['yaw'] = ants[id]['positions']['yaw'] - 1
-	
+	check_ant(id)
 	if ants[id]['positions']['yaw'] == 0:
 		ants[id]['positions']['x'] = ants[id]['positions']['x'] + 1
 	elif ants[id]['positions']['yaw'] == 1:
-		ants[id]['positions']['y'] = ants[id]['positions']['y'] + 1
+		ants[id]['positions']['y'] = ants[id]['positions']['y'] - 1
 	elif ants[id]['positions']['yaw'] == 2:
 		ants[id]['positions']['x'] = ants[id]['positions']['x'] - 1
 	elif ants[id]['positions']['yaw'] == 3:
-		ants[id]['positions']['y'] = ants[id]['positions']['y'] - 1
+		ants[id]['positions']['y'] = ants[id]['positions']['y'] + 1
 
 	check_ant(id)
 
