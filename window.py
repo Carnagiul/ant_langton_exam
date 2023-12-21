@@ -19,10 +19,8 @@ ant_entries = None
 ant_labels = None
 ant_buttons = None
 
-colored_cells = None
-
 def update_window():
-	global window, frame, canvas, colored_cells, ant_count_scale
+	global window, frame, canvas, ant_count_scale
 	def update():
 		if get_game_running():
 			for i in range(ant_count_scale.get()):
@@ -244,7 +242,6 @@ def initWindow():
 	window_preview = Tk()
 	window_preview.title('Commands')
 
-	colored_cells = []
 
 	grid = create_random_grid_lc(get_width_grid(), get_height_grid(), [0,1])
 	canvas = custom_grid_canvas(window, grid, get_size_cell(), margin=10, gutter=2, show_vals=False, outline=False)

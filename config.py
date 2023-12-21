@@ -139,8 +139,8 @@ def set_size_cell(new_size):
 	size_cell = new_size
 
 def create_new_ant(id):
-	global max_width_grid, max_height_grid
-	return {
+	global ants, max_width_grid, max_height_grid
+	ant = {
 		"label" : "Ant " + str(id),
 		"color" : "red",
 		"enabled": True,
@@ -149,7 +149,9 @@ def create_new_ant(id):
 			"y": random.randint(0, max_height_grid),
 			"yaw": 0,
 		}
-	},
+	}
+	ants[len(ants)] = ant
+	return ant
 
 def check_ant(id):
 	global ants
@@ -161,23 +163,35 @@ def check_ant(id):
 		ants[id]['positions']['y'] = get_height_grid() - 1
 	elif ants[id]['positions']['y'] >= get_height_grid():
 		ants[id]['positions']['y'] = 0
+	if ants[id]['positions']['yaw'] < 0:
+		ants[id]['positions']['yaw'] = 3
+	elif ants[id]['positions']['yaw'] >= 4:
+		ants[id]['positions']['yaw'] = 0
+	
 
 
 def moveAnt(id):
 	global ants
+	old_x = ants[id]['positions']['x']
+	old_y = ants[id]['positions']['y']
+	old_yaw = ants[id]['positions']['yaw']
+
 	if ants[id]['positions']['yaw'] == 0:
-		ants[id]['positions']['yaw'] = 1
 		ants[id]['positions']['x'] = ants[id]['positions']['x'] + 1
 	elif ants[id]['positions']['yaw'] == 1:
-		ants[id]['positions']['yaw'] = 2
 		ants[id]['positions']['y'] = ants[id]['positions']['y'] - 1
 	elif ants[id]['positions']['yaw'] == 2:
-		ants[id]['positions']['yaw'] = 3
 		ants[id]['positions']['x'] = ants[id]['positions']['x'] - 1
 	elif ants[id]['positions']['yaw'] == 3:
-		ants[id]['positions']['yaw'] = 0
 		ants[id]['positions']['y'] = ants[id]['positions']['y'] + 1
+	ants[id]['positions']['yaw'] = ants[id]['positions']['yaw'] + 1
 	check_ant(id)
+
+	next_x = ants[id]['positions']['x']
+	next_y = ants[id]['positions']['y']
+	next_yaw = ants[id]['positions']['yaw']
+
+	print({old_x, old_y, old_yaw}, {next_x, next_y, next_yaw})	
 
 def get_ant(i):
 	global ants
