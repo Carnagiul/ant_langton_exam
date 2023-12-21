@@ -5,6 +5,8 @@ ant_count = 1
 matrice = [];
 
 size_cell = 0
+size_cell_x = 0
+size_cell_y = 0
 
 width_grid = 0
 max_width_grid = 150
@@ -35,6 +37,22 @@ def get_height_grid():
     global height_grid
     return height_grid
 
+def get_size_cell_x():
+	global size_cell_x
+	return size_cell_x
+
+def get_size_cell_y():
+	global size_cell_y
+	return size_cell_y
+
+def set_size_cell_x(new_size):
+	global size_cell_x
+	size_cell_x = new_size
+
+def set_size_cell_y(new_size):
+	global size_cell_y
+	size_cell_y = new_size
+
 def verify_grid():
 	global size_cell, width_grid, height_grid
 	if width_grid < min_width_grid :
@@ -45,6 +63,8 @@ def verify_grid():
 		height_grid = min_height_grid
 	if height_grid > max_height_grid :
 		height_grid = max_height_grid
+
+	# Define the size of the cell based on the size of the grid
 
 	if 50 <= width_grid <75 and 50 <= height_grid <75 :
 		size_cell = 10

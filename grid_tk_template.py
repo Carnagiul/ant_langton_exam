@@ -4,6 +4,7 @@ from grid_manager_template import *
 # Dictionnaires des paramètres de forme d'une grille
 COLORS = {'bg': 'white', 'fg': 'red', 'outline': 'black', 'text_val': 'black'}
 FONT = {'text_val': 'Arial'}
+
 def custom_grid_canvas(master, grid, size_cell, margin=10, gutter=5, show_vals=True, outline=True):
     x_cnv = nb_lines(grid) 
     y_cnv = nb_columns(grid)
