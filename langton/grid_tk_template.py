@@ -1,5 +1,5 @@
 from tkinter import *
-from grid_manager_template import *
+from langton.grid_manager_template import *
 
 # Dictionnaires des paramètres de forme d'une grille
 COLORS = {'bg': 'white', 'fg': 'red', 'outline': 'black', 'text_val': 'black'}

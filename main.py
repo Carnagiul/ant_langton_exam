@@ -1,7 +1,7 @@
 import tkinter as tk
-from Framesbase import *
-from config import *
-from window import *
+from langton.Framesbase import *
+from langton.config import *
+from langton.window import *
     
 if __name__ == "__main__":
     

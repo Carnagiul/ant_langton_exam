@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from Interface import *
-from config import *
+from langton.config import *
 
 
 def create_header_text(window):
@@ -49,7 +48,7 @@ def getWidthGrid():
 
 def show_start_frame():
     window = Tk()
-    window.title('Langton grid')
+    window.title('Langton config')
     width = 500
     height = 300
 

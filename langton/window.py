@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from config import *
-from grid_manager_template import *
-from grid_tk_template import *
+from langton.config import *
+from langton.grid_manager_template import *
+from langton.grid_tk_template import *
 from tkinter.colorchooser import askcolor
 
 window = None
@@ -39,9 +39,8 @@ def update_window():
 						canvas.delete('c_'+str(x)+'_'+str(y))
 					moveAnt(i, updated_cell)
 			increase_iteration()
-			window.after(100, update)  # Schedule the next update after 100 milliseconds
+			window.after(1, update)  # Schedule the next update after 100 milliseconds
 	update()
-
 
 def renderMenu():
 	global window, frame, canvas, window_preview, frame_preview, ant_count_scale
@@ -259,12 +258,12 @@ def initWindow():
 	window.geometry('%dx%d+%d+%d' % (width, height, x0, y0))
 	window.resizable(False, False)
 
-	window_preview.geometry('%dx%d+%d+%d' % (800, height, 200, y0))
+	window_preview.geometry('%dx%d+%d+%d' % (800, 600, 200, 300))
 	window_preview.resizable(False, False)
 
 	canvas.grid(row=0, column=0, sticky='nsew')
 
-	frame = tk.Frame(window,bg='red')
+	frame = tk.Frame(window,bg='gray')
 	frame.grid(row=0, column=1, sticky='nsew')
 
 	frame_preview = tk.Frame(window_preview,bg='red')

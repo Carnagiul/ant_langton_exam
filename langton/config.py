@@ -14,10 +14,53 @@ height_grid = 0
 max_height_grid = 1000
 min_height_grid = 50
 
+min_zoom_x = 0
+max_zoom_x = 1000
+
+min_zoom_y = 0
+max_zoom_y = 0
+
 game_running = False
 
 ants = []
 
+# def increase_zoom(x, y):
+	#need to check first if x is nearest of min_zoom_x or max_zoom_x
+	#need to check first if y is nearest of min_zoom_y or max_zoom_y
+	#if max_zoom_x - min_zoom_x < 10xsize_cell then return
+	
+
+def get_max_zoom_x():
+	global max_zoom_x
+	return max_zoom_x
+
+def get_min_zoom_x():
+	global min_zoom_x
+	return min_zoom_x
+
+def get_max_zoom_y():
+	global max_zoom_y
+	return max_zoom_y
+
+def get_min_zoom_y():
+	global min_zoom_y
+	return min_zoom_y
+
+def set_max_zoom_x(new_zoom_x):
+	global max_zoom_x
+	max_zoom_x = new_zoom_x
+
+def set_min_zoom_x(new_zoom_x):
+	global min_zoom_x
+	min_zoom_x = new_zoom_x
+
+def set_max_zoom_y(new_zoom_y):
+	global max_zoom_y
+	max_zoom_y = new_zoom_y
+
+def set_min_zoom_y(new_zoom_y):
+	global min_zoom_y
+	min_zoom_y = new_zoom_y
 
 def set_width_grid(new_width):
     global width_grid
@@ -67,10 +110,14 @@ def get_ant_count():
     return ant_count
 
 def define_new_matrix():
-    global matrice, width_grid, height_grid
-
-    # Define a new matrix based on width_grid and height_grid
-    matrice = [[False for _ in range(width_grid)] for _ in range(height_grid)]
+	global matrice, width_grid, height_grid
+	
+	set_min_zoom_x(0)
+	set_min_zoom_y(0)
+	set_max_zoom_x(width_grid)
+	set_max_zoom_y(height_grid)
+	# Define a new matrix based on width_grid and height_grid
+	matrice = [[False for _ in range(width_grid)] for _ in range(height_grid)]
 
 def increase_iteration():
 	global iteration
